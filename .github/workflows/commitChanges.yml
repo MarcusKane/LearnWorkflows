@@ -1,0 +1,14 @@
+name: Committ changes to second branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]  
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: windows-latest
+    steps:      
+      - uses: actions/checkout@v2
+      - uses    
