@@ -12,7 +12,7 @@ jobs:
         with:
           ref: secondBranch
       
-      - run: git pull main
+      - run: git pull origin/main
       - run: git add testFile.txt
       - run: git commit -m "Commit from workflow test"
           
