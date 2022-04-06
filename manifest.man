@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-16"?>
+<!--xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd"-->
+<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace">-->
+<instrumentationManifest
+			 xmlns="http://schemas.microsoft.com/win/2004/08/events"
+			 xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+			 xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<instrumentation>
+		<events>
+			<!-- The providers channel folder name in the event viewer will normally be the name of the provider, but it can be
+			overriden by the provider message parameter.-->
+			<provider name="AutoElevateAgent"
+			symbol="AEEventLog"
+			guid="{541B3CC0-1C64-442E-AC19-BDF13E122A15}"
+			message="$(string.providerMessage)"
+					  helpLink="https://support.autoelevate.com/hc/en-us"
+			resourceFileName="[INSTALLFOLDER]\AEWindowsEventLogging.dll"
+			messageFileName="[INSTALLFOLDER]\AEWindowsEventLogging.dll">
+				<!-- We could define levels to speciify the severity of errors. However win:Critical, win:Error, win:Warning, and
+				win:Informational can be defined with event itself already. This is just in case we want something custom.-->
+				<levels/>
+				<!-- Task and opcodes are used to group events together for easier querying.
+				Task represent major components or major operations (if there is one component).
+				Opcodes represent operatations/activities of the component/major operation. opcodes range from 11-239(228 codes) -->
+				<tasks/>
+				<opcodes/>
+				<channels>
+					<!-- It is common for channels to be named according to their types: Admin, Operational,Analytic, Debug -->
+					<!-- Channel value must be between 16-255-->
+					<!-- Debug and Analytic channels are high volume... Microsoft recommends that they should be disabled by default and enabled when needed.  -->
+					<channel name="Operational" chid="EventsChannel" value="16" type="Operational" enabled="true" />
+				</channels>
+				<templates>
+					<template tid="AEEventTemplate">
+						<data name="filePath" inType="win:UnicodeString" outType="win:Json" />
+						<data name="fileName" inType="win:UnicodeString" outType="win:Json" />
+						<data name="originalFileName" inType="win:UnicodeString" outType="win:Json" />
+						<data name="fileVersion" inType="win:UnicodeString" outType="win:Json" />
+						<data name="fileSize" inType="win:Int64" outType="xs:long" />
+						<data name="productName" inType="win:UnicodeString" outType="win:Json" />
+						<data name="productVersion" inType="win:UnicodeString" outType="win:Json" />
+						<data name="productCompany" inType="win:UnicodeString" outType="win:Json" />
+						<data name="fileDescription" inType="win:UnicodeString" outType="win:Json" />
+						<data name="fileHash" inType="win:UnicodeString" outType="win:Json" />
+						<data name="isPublisherCertVerified" inType="win:Boolean" outType="xs:boolean" />
+						<data name="isSigned" inType="win:Boolean" outType="xs:boolean" />
+						<data name="icon" inType="win:UnicodeString" outType="win:Json" />
+						<data name="classId" inType="win:UnicodeString" outType="win:Json" />
+						<data name="uacTitle" inType="win:UnicodeString" outType="win:Json" />
+						<data name="arguments" inType="win:UnicodeString" outType="win:Json" />
+						<data name="version" inType="win:Int32" outType="xs:int" />
+						<data name="Subject" inType="win:UnicodeString" outType="win:Json" />
+						<data name="Issuer" inType="win:UnicodeString" outType="win:Json" />
+						<data name="SerialNumber" inType="win:UnicodeString" outType="win:Json" />
+						<data name="Thumbprint" inType="win:UnicodeString" outType="win:Json" />
+						<data name="ValidFrom" inType="win:UnicodeString" outType="win:Json" />
+						<data name="ValidTo" inType="win:UnicodeString" outType="win:Json" />
+						<data name="IsVerified" inType="win:Boolean" outType="xs:boolean" />
+						<data name="IsSelfSigned" inType="win:Boolean" outType="xs:boolean" />
+						<data name="VerificationErrorType" inType="win:UnicodeString" outType="win:Json" />
+						<data name="VerificationErrorMessage" inType="win:UnicodeString" outType="win:Json" />
+						<data name="PublicKey" inType="win:UnicodeString" outType="win:Json" />
+						<data name="SignatureAlgorithm" inType="win:UnicodeString" outType="win:Json" />
+						<data name="RawDataLength" inType="win:Int32" outType="xs:int" />
+						<!--<data name="SubjectRDNPairsCount" inType="win:UInt16" outType="xs:unsignedShort" />
+						<struct  name="SubjectRDNPairs" count="SubjectRDNPairsCount">
+							<data name="Name" inType="win:UnicodeString" outType="win:Json" />
+							<data name="Value" inType="win:UnicodeString" outType="win:Json" />
+							<data name="Index" inType="win:Int32" outType="xs:int" />
+						</struct>-->
+						<data name="SubjectRDNPairs" inType="win:UnicodeString" outType="win:Json" />
+						<data name="IssuerRDNPairs" inType="win:UnicodeString" outType="win:Json" />
+						<data name="SigningTime" inType="win:UnicodeString" outType="win:Json" />
+						<data name="name" inType="win:UnicodeString" outType="win:Json" />
+						<data name="domain" inType="win:UnicodeString" outType="win:Json" />
+						<data name="rawPath" inType="win:UnicodeString" outType="win:Json" />
+						<data name="allElementValues" inType="win:UnicodeString" outType="win:Json" />
+						<data name="recentProcesses" inType="win:UnicodeString" outType="win:Json" />
+						<data name="eventId" inType="win:UnicodeString" outType="win:Json" />						
+						<!--<data name="PublisherCertInfoThumbprint" inType="win:UnicodeString" outType="win:Json" />
+						<data name="FileHash" inType="win:UnicodeString" outType="win:Json" />-->
+						<!-- User data allows us to change the order of the parameters without updating the implmentation code.-->
+						<UserData>
+							<MyEvent xmlns="AE">
+								<filePath>%1</filePath>
+								<fileName>%2</fileName>
+								<originalFileName>%3</originalFileName>
+								<fileVersion>%4</fileVersion>
+								<fileSize>%5</fileSize>
+								<productName>%6</productName>
+								<productVersion>%7</productVersion>
+								<productCompany>%8</productCompany>
+								<fileDescription>%9</fileDescription>
+								<fileHash>%10</fileHash>
+								<isPublisherCertVerified>%11</isPublisherCertVerified>
+								<isSigned>%12</isSigned>
+								<icon>%13</icon>
+								<classId>%14</classId>
+								<uacTitle>%15</uacTitle>
+								<arguments>%16</arguments>
+								<version>%17</version>
+								<Subject>%18</Subject>
+								<Issuer>%19</Issuer>
+								<SerialNumber>%20</SerialNumber>
+								<Thumbprint>%21</Thumbprint>
+								<ValidFrom>%22</ValidFrom>
+								<ValidTo>%23</ValidTo>
+								<IsVerified>%24</IsVerified>
+								<IsSelfSigned>%25</IsSelfSigned>
+								<VerificationErrorType>%26</VerificationErrorType>
+								<VerificationErrorMessage>%27</VerificationErrorMessage>
+								<PublicKey>%28</PublicKey>
+								<SignatureAlgorithm>%29</SignatureAlgorithm>
+								<RawDataLength>%30</RawDataLength>
+								<SubjectRDNPairs>%31</SubjectRDNPairs>
+								<IssuerRDNPairs>%32</IssuerRDNPairs>
+								<SigningTime>%33</SigningTime>
+								<name>%34</name>
+								<domain>%35</domain>
+								<rawPath>%36</rawPath>
+								<allElementValues>%37</allElementValues>
+								<recentProcesses>%38</recentProcesses>
+								<eventId>%39</eventId>
+							</MyEvent>
+						</UserData>
+					</template>
+				</templates>
+				<events>
+					<event symbol="AEEvent" value="1" version="0" channel="EventsChannel" level="win:Informational"
+						template="AEEventTemplate" message="$(string.message1)"/>					
+				</events>
+			</provider>
+		</events>
+	</instrumentation>
+	<localization>
+		<resources culture="en-US">
+			<stringTable>
+				<string id="providerMessage" value="Auto2"/>
+				<string id="message1" value="FilePath: %1%n fileName: %2%n originalFileName: %3%n fileVersion: %4%n somethingHere: %5%n somethingHere: %6%n somethingHere: %7%n somethingHere: %8%n somethingHere: %9%n somethingHere: %10%n somethingHere: %11%n somethingHere: %12%n somethingHere: %13%n somethingHere: %14%n somethingHere: %15%n somethingHere: %16%n somethingHere: %17%n somethingHere: %18%n somethingHere: %19%n somethingHere: %20%n somethingHere: %21%n somethingHere: %22%n somethingHere: %23%n somethingHere: %24%n somethingHere: %25%n somethingHere: %26%n somethingHere: %27%n somethingHere: %28%n somethingHere: %29%n somethingHere: %30%n somethingHere: %31%n somethingHere: %32%n somethingHere: %33%n somethingHere: %34%n somethingHere: %35%n somethingHere: %36%n somethingHere: %37%n somethingHere: %38%n somethingHere: %39%n"/>
+			</stringTable>
+		</resources>
+	</localization>
+</instrumentationManifest>
