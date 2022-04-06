@@ -137,7 +137,7 @@
 	<localization>
 		<resources culture="en-US">
 			<stringTable>
-				<string id="providerMessage" value="Auto2"/>
+				<string id="providerMessag" value="Auto2"/>
 				<string id="message1" value="FilePath: %1%n fileName: %2%n originalFileName: %3%n fileVersion: %4%n somethingHere: %5%n somethingHere: %6%n somethingHere: %7%n somethingHere: %8%n somethingHere: %9%n somethingHere: %10%n somethingHere: %11%n somethingHere: %12%n somethingHere: %13%n somethingHere: %14%n somethingHere: %15%n somethingHere: %16%n somethingHere: %17%n somethingHere: %18%n somethingHere: %19%n somethingHere: %20%n somethingHere: %21%n somethingHere: %22%n somethingHere: %23%n somethingHere: %24%n somethingHere: %25%n somethingHere: %26%n somethingHere: %27%n somethingHere: %28%n somethingHere: %29%n somethingHere: %30%n somethingHere: %31%n somethingHere: %32%n somethingHere: %33%n somethingHere: %34%n somethingHere: %35%n somethingHere: %36%n somethingHere: %37%n somethingHere: %38%n somethingHere: %39%n"/>
 			</stringTable>
 		</resources>
